@@ -77,3 +77,10 @@
 - [x] Test background job execution
 - [x] Validate notification delivery
 - [x] Performance testing with large feed lists
+
+
+## Bugs Reportados
+
+- [x] Loop infinito na compilação/carregamento (resolvido: era cache do dev server)
+- [x] Features não abrem corretamente (resolvido: corrigido menu de navegação)
+- [x] Erro de sintaxe em routers.ts linha 272 (resolvido: era falso positivo do esbuild)
