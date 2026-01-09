@@ -10,11 +10,13 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Loader2, ExternalLink, Zap, Filter, Edit2, Trash2 } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
+import { EditCurationItemModal } from "@/components/EditCurationItemModal";
 
 export default function Curation() {
   const { user } = useAuth();
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const [filterRegion, setFilterRegion] = useState<string>("global");
+  const [editingItem, setEditingItem] = useState<any>(null);
 
   const { data: contentItems, isLoading: itemsLoading } = trpc.content.getRecent.useQuery({
     limit: 100,
@@ -145,6 +147,7 @@ export default function Curation() {
                         <Button
                           variant="outline"
                           size="sm"
+                          onClick={() => setEditingItem(item)}
                           title="Editar item"
                         >
                           <Edit2 className="h-4 w-4" />
@@ -204,6 +207,17 @@ export default function Curation() {
             </CardContent>
           </Card>
         )}
+
+        {/* Edit Modal */}
+        <EditCurationItemModal
+          isOpen={!!editingItem}
+          onClose={() => setEditingItem(null)}
+          item={editingItem}
+          onSave={async (data) => {
+            // Implement update mutation here
+            console.log("Saving:", data);
+          }}
+        />
       </div>
     </DashboardLayout>
   );

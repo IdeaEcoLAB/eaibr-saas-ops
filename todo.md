@@ -92,3 +92,11 @@
 - [x] Adicionar botão editar em Curadoria
 - [x] Adicionar botão editar em Roteiros
 - [ ] Implementar modais de edição para cada seção
+
+
+## Bug Fixes
+
+- [x] Botão editar em RSS Management não funcional - implementar modal
+- [x] Botão editar em Curadoria não funcional - implementar modal
+- [x] Botão editar em Roteiros não funcional - implementar modal
+- [ ] Botão deletar em todas as seções não funcional - implementar confirmação

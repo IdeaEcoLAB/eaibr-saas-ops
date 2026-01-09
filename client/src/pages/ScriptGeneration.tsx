@@ -10,11 +10,13 @@ import { Loader2, Download, Copy, CheckCircle2, Edit2, Trash2 } from "lucide-rea
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { Streamdown } from "streamdown";
+import { EditScriptModal } from "@/components/EditScriptModal";
 
 export default function ScriptGeneration() {
   const { user } = useAuth();
   const [episodeId, setEpisodeId] = useState<number | null>(null);
   const [copiedSection, setCopiedSection] = useState<string | null>(null);
+  const [editingScript, setEditingScript] = useState<any>(null);
 
   const { data: upcomingEpisode } = trpc.episodes.getUpcoming.useQuery();
   const { data: script, isLoading: scriptLoading } = trpc.scripts.getByEpisode.useQuery(
@@ -262,7 +264,12 @@ ${script.aplicacaoPratica}
                 </CardDescription>
               </div>
               <div className="flex gap-2">
-                <Button variant="outline" size="sm" title="Editar roteiro">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setEditingScript(script)}
+                  title="Editar roteiro"
+                >
                   <Edit2 className="h-4 w-4" />
                 </Button>
                 <Button variant="outline" size="sm" onClick={downloadMarkdown} title="Download Markdown">
@@ -377,6 +384,17 @@ ${script.aplicacaoPratica}
             </CardContent>
           </Card>
         )}
+
+        {/* Edit Modal */}
+        <EditScriptModal
+          isOpen={!!editingScript}
+          onClose={() => setEditingScript(null)}
+          script={editingScript}
+          onSave={async (data) => {
+            // Implement update mutation here
+            console.log("Saving:", data);
+          }}
+        />
       </div>
     </DashboardLayout>
   );

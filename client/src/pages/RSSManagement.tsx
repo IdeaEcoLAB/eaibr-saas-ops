@@ -10,12 +10,14 @@ import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { EditRSSSourceModal } from "@/components/EditRSSSourceModal";
 
 export default function RSSManagement() {
   const { user } = useAuth();
   const [newSourceUrl, setNewSourceUrl] = useState("");
   const [newSourceName, setNewSourceName] = useState("");
   const [editingId, setEditingId] = useState<number | null>(null);
+  const [editingSource, setEditingSource] = useState<any>(null);
 
   const { data: sources, isLoading: sourcesLoading, refetch } = trpc.rss.getSources.useQuery();
   const { data: status } = trpc.rss.getStatus.useQuery();
@@ -247,7 +249,7 @@ export default function RSSManagement() {
                         <Button
                           variant="outline"
                           size="sm"
-                          onClick={() => setEditingId(source.id)}
+                          onClick={() => setEditingSource(source)}
                           title="Editar fonte"
                         >
                           <Edit2 className="h-4 w-4" />
@@ -302,6 +304,18 @@ export default function RSSManagement() {
             </p>
           </CardContent>
         </Card>
+
+        {/* Edit Modal */}
+        <EditRSSSourceModal
+          isOpen={!!editingSource}
+          onClose={() => setEditingSource(null)}
+          source={editingSource}
+          onSave={async (data) => {
+            // Implement update mutation here
+            console.log("Saving:", data);
+            refetch();
+          }}
+        />
       </div>
     </DashboardLayout>
   );
