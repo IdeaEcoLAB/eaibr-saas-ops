@@ -299,13 +299,63 @@ pnpm test
 # Tests: 12 passed
 ```
 
+## Integração RSS Automática
+
+O sistema agora inclui coleta automática de feeds RSS das três regiões principais:
+
+### Configuração
+
+1. Acesse a página **Gerenciamento de Fontes RSS** (`/rss`)
+2. Adicione fontes RSS com nome e URL
+3. O sistema coleta automaticamente a cada 30 minutos
+4. Sincronize manualmente a qualquer momento
+
+### Fluxo de Coleta
+
+1. **Parser RSS:** Lê feeds RSS com timeout de 10 segundos
+2. **Deduplicação:** Verifica URLs para evitar duplicatas
+3. **Armazenamento:** Salva itens no banco de dados
+4. **Notificação:** Alerta o proprietário quando novo conteúdo é coletado
+5. **Análise IA:** Classifica automaticamente cada item
+
+### Procedimentos tRPC Disponíveis
+
+```typescript
+// Obter fontes ativas
+trpc.rss.getSources.useQuery()
+
+// Sincronizar uma fonte específica
+trpc.rss.syncSource.useMutation({ sourceId: 1 })
+
+// Sincronizar todas as fontes
+trpc.rss.syncAll.useMutation()
+
+// Obter status de sincronização
+trpc.rss.getStatus.useQuery()
+```
+
+### Fontes Recomendadas
+
+**EUA:**
+- MIT Technology Review
+- Stanford AI Index
+- OpenAI Blog
+
+**China:**
+- South China Morning Post (Tech)
+- Baidu Research
+
+**Brasil:**
+- Startse
+- Tecnoblog
+- InfoQ Brasil
+
 ## Próximos Passos
 
-1. **Integração com RSS:** Configurar coleta automática de feeds
-2. **Webhooks:** Notificações quando novo conteúdo é coletado
-3. **Analytics:** Rastreamento de performance de episódios
-4. **Agendamento:** Publicação automática em horários específicos
-5. **Colaboração:** Interface multi-usuário para curadores
+1. **Webhooks:** Notificações em tempo real quando novo conteúdo é coletado
+2. **Analytics:** Rastreamento de performance de episódios
+3. **Agendamento:** Publicação automática em horários específicos
+4. **Colaboração:** Interface multi-usuário para curadores
 
 ## Suporte e Troubleshooting
 

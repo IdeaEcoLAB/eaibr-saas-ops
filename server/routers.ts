@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { rssRouter } from "./routers/rssRouter";
 import { TRPCError } from "@trpc/server";
 import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
@@ -32,6 +33,7 @@ import {
 
 export const appRouter = router({
   system: systemRouter,
+  rss: rssRouter,
   
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),

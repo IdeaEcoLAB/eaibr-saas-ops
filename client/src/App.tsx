@@ -4,6 +4,7 @@ import NotFound from "@/pages/NotFound";
 import Dashboard from "@/pages/Dashboard";
 import Curation from "@/pages/Curation";
 import ScriptGeneration from "@/pages/ScriptGeneration";
+import RSSManagement from "@/pages/RSSManagement";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -16,6 +17,7 @@ function Router() {
       <Route path={"/dashboard"} component={Dashboard} />
       <Route path={"/curation"} component={Curation} />
       <Route path={"/scripts"} component={ScriptGeneration} />
+      <Route path={"/rss"} component={RSSManagement} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
