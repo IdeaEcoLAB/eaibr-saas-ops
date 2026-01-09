@@ -84,3 +84,11 @@
 - [x] Loop infinito na compilação/carregamento (resolvido: era cache do dev server)
 - [x] Features não abrem corretamente (resolvido: corrigido menu de navegação)
 - [x] Erro de sintaxe em routers.ts linha 272 (resolvido: era falso positivo do esbuild)
+
+
+## UI/UX Improvements
+
+- [x] Adicionar botão editar em RSS Management (padrão: ícone refresh/lápis)
+- [x] Adicionar botão editar em Curadoria
+- [x] Adicionar botão editar em Roteiros
+- [ ] Implementar modais de edição para cada seção

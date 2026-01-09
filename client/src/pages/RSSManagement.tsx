@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Loader2, Plus, RefreshCw, Trash2, ExternalLink } from "lucide-react";
+import { Loader2, Plus, RefreshCw, Trash2, ExternalLink, Edit2 } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { format } from "date-fns";
@@ -15,6 +15,7 @@ export default function RSSManagement() {
   const { user } = useAuth();
   const [newSourceUrl, setNewSourceUrl] = useState("");
   const [newSourceName, setNewSourceName] = useState("");
+  const [editingId, setEditingId] = useState<number | null>(null);
 
   const { data: sources, isLoading: sourcesLoading, refetch } = trpc.rss.getSources.useQuery();
   const { data: status } = trpc.rss.getStatus.useQuery();
@@ -246,8 +247,17 @@ export default function RSSManagement() {
                         <Button
                           variant="outline"
                           size="sm"
+                          onClick={() => setEditingId(source.id)}
+                          title="Editar fonte"
+                        >
+                          <Edit2 className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
                           onClick={() => handleSyncSource(source.id)}
                           disabled={syncSourceMutation.isPending}
+                          title="Sincronizar fonte"
                         >
                           {syncSourceMutation.isPending ? (
                             <Loader2 className="h-4 w-4 animate-spin" />
@@ -259,6 +269,7 @@ export default function RSSManagement() {
                           variant="outline"
                           size="sm"
                           className="text-destructive hover:text-destructive"
+                          title="Deletar fonte"
                         >
                           <Trash2 className="h-4 w-4" />
                         </Button>

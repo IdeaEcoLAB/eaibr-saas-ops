@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Loader2, Download, Copy, CheckCircle2 } from "lucide-react";
+import { Loader2, Download, Copy, CheckCircle2, Edit2, Trash2 } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { Streamdown } from "streamdown";
@@ -261,10 +261,17 @@ ${script.aplicacaoPratica}
                   Duração estimada: {script.estimatedDuration} minutos
                 </CardDescription>
               </div>
-              <Button variant="outline" size="sm" onClick={downloadMarkdown}>
-                <Download className="h-4 w-4 mr-2" />
-                Download MD
-              </Button>
+              <div className="flex gap-2">
+                <Button variant="outline" size="sm" title="Editar roteiro">
+                  <Edit2 className="h-4 w-4" />
+                </Button>
+                <Button variant="outline" size="sm" onClick={downloadMarkdown} title="Download Markdown">
+                  <Download className="h-4 w-4" />
+                </Button>
+                <Button variant="outline" size="sm" className="text-destructive hover:text-destructive" title="Deletar roteiro">
+                  <Trash2 className="h-4 w-4" />
+                </Button>
+              </div>
             </CardHeader>
             <CardContent>
               <Tabs defaultValue="radar" className="w-full">
